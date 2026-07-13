@@ -182,7 +182,7 @@ After signing in on the settings page, you can use **Back Up Now / Restore from 
 ## Tech Stack
 
 - **Single-file frontend architecture** (Single HTML File) - zero backend, zero dependencies
-- **Google Gemini 2.5 Flash** - text generation
+- **Google Gemini 3.5 Flash** - text generation
 - **Google Gemini TTS** - AI speech synthesis
 - **IndexedDB** - local persistent storage
 - **Google Drive appDataFolder** - cloud backup
