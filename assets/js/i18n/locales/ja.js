@@ -50,6 +50,8 @@ export default {
     "examSectionSummary": "Listening {lCorrect}/{lTotal} ・ Reading {rCorrect}/{rTotal} ・ Vocabulary {vCorrect}/{vTotal} ・ Grammar {gCorrect}/{gTotal}",
     "examWrongCountLabel": "誤答数: {count}",
     "examReviewAudioTitle": "保存した音声を再生",
+    "examListeningScriptTitle": "リスニング原文（答え合わせ用）",
+    "examListeningScriptLabel": "リスニング原文",
     "examYourAnswer": "あなたの回答",
     "examNoAnswer": "未回答",
     "examCorrectAnswer": "正解",

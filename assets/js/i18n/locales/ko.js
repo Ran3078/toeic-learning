@@ -50,6 +50,8 @@ export default {
     "examSectionSummary": "리스닝 {lCorrect}/{lTotal} - 리딩 {rCorrect}/{rTotal} - 어휘 {vCorrect}/{vTotal} - 문법 {gCorrect}/{gTotal}",
     "examWrongCountLabel": "오답 수: {count}",
     "examReviewAudioTitle": "저장된 음성 재생",
+    "examListeningScriptTitle": "듣기 원문 (정답 확인용)",
+    "examListeningScriptLabel": "듣기 원문",
     "examYourAnswer": "내 답",
     "examNoAnswer": "미응답",
     "examCorrectAnswer": "정답",

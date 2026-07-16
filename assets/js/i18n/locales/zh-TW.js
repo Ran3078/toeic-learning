@@ -50,6 +50,8 @@ export default {
     "examSectionSummary": "聽力 {lCorrect}/{lTotal} ・ 閱讀 {rCorrect}/{rTotal} ・ 單字 {vCorrect}/{vTotal} ・ 文法 {gCorrect}/{gTotal}",
     "examWrongCountLabel": "錯題數：{count}",
     "examReviewAudioTitle": "播放已保存語音",
+    "examListeningScriptTitle": "聽力原文（對答案用）",
+    "examListeningScriptLabel": "聽力原文",
     "examYourAnswer": "你的答案",
     "examNoAnswer": "未作答",
     "examCorrectAnswer": "正確答案",

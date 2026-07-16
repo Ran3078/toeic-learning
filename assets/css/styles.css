@@ -538,6 +538,29 @@ h1 { font-size: 20px; margin: 0; font-weight: 700; color: var(--primary); }
     margin-bottom: 10px;
     font-size: 14px;
 }
+.exam-listening-scripts {
+    border: 1px solid #e8ecf5;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #fafbff;
+    display: grid;
+    gap: 10px;
+}
+.exam-listening-scripts-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+.exam-listening-script-item {
+    display: grid;
+    gap: 4px;
+    font-size: 13px;
+}
+.exam-listening-script-text {
+    color: #333;
+    line-height: 1.45;
+    white-space: pre-wrap;
+}
 .exam-wrong-list {
     display: grid;
     gap: 8px;

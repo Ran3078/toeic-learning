@@ -138,7 +138,7 @@ export async function fetchExamQuestions(score) {
         Target score: ${score}.
         Output STRICT JSON only with this shape:
         {
-          "listening": [{"id":"L1","question":"...","audioText":"text to speak","options":[{"key":"A","text":"..."},{"key":"B","text":"..."},{"key":"C","text":"..."},{"key":"D","text":"..."}],"answerKey":"A","explanationSeed":"..."}],
+          "listening": [{"id":"L1","question":"...","audioText":"spoken listening material","options":[{"key":"A","text":"..."},{"key":"B","text":"..."},{"key":"C","text":"..."},{"key":"D","text":"..."}],"answerKey":"A","explanationSeed":"..."}],
           "reading": [{"id":"R1","passage":"...","question":"...","options":[{"key":"A","text":"..."},{"key":"B","text":"..."},{"key":"C","text":"..."},{"key":"D","text":"..."}],"answerKey":"A","explanationSeed":"..."}],
           "vocabulary": [{"id":"V1","question":"...","options":[{"key":"A","text":"..."},{"key":"B","text":"..."},{"key":"C","text":"..."},{"key":"D","text":"..."}],"answerKey":"A","explanationSeed":"..."}],
           "grammar": [{"id":"G1","question":"...","options":[{"key":"A","text":"..."},{"key":"B","text":"..."},{"key":"C","text":"..."},{"key":"D","text":"..."}],"answerKey":"A","explanationSeed":"..."}]
@@ -154,6 +154,12 @@ export async function fetchExamQuestions(score) {
         - options must contain meaningful English option text, not only letters.
         - answerKey must be exactly one option key from options.
         - Use ${targetLang} for explanations if needed, but question can be English.
+        - Listening field rules (critical):
+          * audioText = spoken listening material ONLY (short dialogue, announcement, or spoken utterance). English only. This text will be spoken by TTS and later shown as the transcript when reviewing answers.
+          * question = on-screen question stem ONLY (what the test-taker must answer after listening).
+          * question MUST NOT equal audioText.
+          * question MUST NOT quote or leak key phrases from audioText that would make the correct option obvious without listening.
+          * Prefer TOEIC style: audioText = material to hear; question = comprehension stem (e.g. "What does the woman want?" / "Where will the meeting be held?").
         - Return raw JSON only.
     `;
     const raw = await fetchJsonFromPrompt(TEXT_MODEL, prompt);

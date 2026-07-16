@@ -812,22 +812,43 @@ function renderExamResult() {
             <div>${t('examWrongCountLabel', { count: result.wrongCount })}</div>
         </div>
     `;
+    const listeningScripts = (state.examState.questions || [])
+        .filter((q) => q.section === 'listening' && q.audioText)
+        .map((q) => {
+            const hasCachedAudio = !!state.examState.listeningAudioByQuestion?.[q.id];
+            const reviewAudioBtn = hasCachedAudio
+                ? `<button class="mini-speaker exam-review-audio-btn" data-action="review-listen" data-id="${q.id}" title="${t('examReviewAudioTitle')}">${ICONS.speaker}</button>`
+                : '';
+            return `
+                <div class="exam-listening-script-item">
+                    <div><strong>${q.id}</strong> ${reviewAudioBtn}</div>
+                    <div class="exam-listening-script-text">${q.audioText}</div>
+                </div>
+            `;
+        }).join('');
+    const listeningScriptHtml = listeningScripts
+        ? `<div class="exam-listening-scripts"><div class="exam-listening-scripts-title">${t('examListeningScriptTitle')}</div>${listeningScripts}</div>`
+        : '';
     const wrongHtml = result.wrongItems.map((item) => {
         const explanation = state.examState.explanations?.find(x => x.id === item.id);
         const hasCachedAudio = !!state.examState.listeningAudioByQuestion?.[item.id];
         const reviewAudioBtn = hasCachedAudio
             ? `<button class="mini-speaker exam-review-audio-btn" data-action="review-listen" data-id="${item.id}" title="${t('examReviewAudioTitle')}">${ICONS.speaker}</button>`
             : '';
+        const audioScript = item.audioText
+            ? `<div>${t('examListeningScriptLabel')}: ${item.audioText}</div>`
+            : '';
         return `
             <div class="exam-wrong-item">
                 <div><strong>${item.section}</strong> - ${item.question}${reviewAudioBtn}</div>
+                ${audioScript}
                 <div>${t('examYourAnswer')}: ${resolveResultChoiceLabel(item, 'selected') || t('examNoAnswer')}</div>
                 <div>${t('examCorrectAnswer')}: ${resolveResultChoiceLabel(item, 'answer') || t('examNoAnswer')}</div>
                 ${explanation ? `<div>${t('examWhyWrong')}: ${explanation.whyWrong}</div><div>${t('examKeyPoint')}: ${explanation.keyPoint}</div><div>${t('examTrap')}: ${explanation.trap}</div>` : ''}
             </div>
         `;
     }).join('');
-    EXAM_CONTENT.innerHTML = `${resultHtml}<div class="exam-wrong-list">${wrongHtml || `<div class="exam-wrong-item">${t('examAllCorrect')}</div>`}</div>`;
+    EXAM_CONTENT.innerHTML = `${resultHtml}${listeningScriptHtml}<div class="exam-wrong-list">${wrongHtml || `<div class="exam-wrong-item">${t('examAllCorrect')}</div>`}</div>`;
 }
 
 async function handleSubmitExam() {
