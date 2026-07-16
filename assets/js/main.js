@@ -13,7 +13,7 @@ import { saveToHistory, savePracticeRecord, renderHistory, loadSession, loadLast
 import { registerServiceWorkerUpdater, scheduleUpdateNoticeAfterAppReady } from './updater.js';
 import { initInstallPrompt } from './installPrompt.js';
 import { startSpeakingSession, stopSpeakingSession } from './speakingLive.js';
-import { flattenExamQuestions, renderExamQuestions, gradeExam, buildWrongPayload, playListeningQuestion, resolveChoice } from './exam.js';
+import { flattenExamQuestions, renderExamQuestions, gradeExam, buildWrongPayload, playListeningQuestion, clearListeningAudioCache, resolveChoice } from './exam.js';
 import { SUPPORTED_LOCALES, applyTranslations, detectBrowserLocale, getLocale, setLocale, t } from './i18n.js';
 import { logError, toErrorMessage } from './errorPolicy.js';
 import { createId } from './id.js';
@@ -885,6 +885,7 @@ EXAM_BTN.onclick = async () => {
         state.examState.recordCreatedAt = createdAt;
         state.examState.voiceName = voiceName;
         state.examState.listeningAudioByQuestion = {};
+        clearListeningAudioCache();
         state.examState.explanationRecordSaved = false;
         await persistExamRecord('exam_generated', { includeSummary: false, explanationsOverride: null });
         EXAM_META.textContent = t('examMeta', { score: state.targetScore, count: questions.length });

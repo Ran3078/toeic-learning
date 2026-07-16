@@ -157,6 +157,15 @@ export function buildWrongPayload(score, wrongItems) {
 
 const listeningAudioCache = new Map();
 
+export function clearListeningAudioCache() {
+    listeningAudioCache.clear();
+}
+
+function listeningAudioCacheKey(q, voiceName) {
+    const text = q.audioText || q.question || '';
+    return `${q.id}:${voiceName}:${text}`;
+}
+
 function speakByBrowserFallback(text) {
     return new Promise((resolve) => {
         try {
@@ -174,7 +183,7 @@ function speakByBrowserFallback(text) {
 }
 
 export async function playListeningQuestion(q, voiceName = 'Kore', prefetchedBase64 = '') {
-    const key = `${q.id}:${voiceName}`;
+    const key = listeningAudioCacheKey(q, voiceName);
     let base64 = prefetchedBase64 || listeningAudioCache.get(key);
     if (base64) listeningAudioCache.set(key, base64);
     if (!base64) {
